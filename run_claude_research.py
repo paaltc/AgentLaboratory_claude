@@ -9,9 +9,23 @@ import sys
 from pathlib import Path
 
 from claude_config import ResearchConfig, load_environment_config, create_default_config
-from claude_workflow import ClaudeResearchWorkflow
-from claude_inference import get_current_cost, get_token_stats
 from claude_native_runner import ClaudeNativeWorkflow, print_claude_code_instructions
+
+# Lazy imports for API mode (only loaded when needed)
+ClaudeResearchWorkflow = None
+get_current_cost = None
+get_token_stats = None
+
+
+def _load_api_modules():
+    """Load API-dependent modules only when needed."""
+    global ClaudeResearchWorkflow, get_current_cost, get_token_stats
+    if ClaudeResearchWorkflow is None:
+        from claude_workflow import ClaudeResearchWorkflow as _CRW
+        from claude_inference import get_current_cost as _gcc, get_token_stats as _gts
+        ClaudeResearchWorkflow = _CRW
+        get_current_cost = _gcc
+        get_token_stats = _gts
 
 
 def run_native_mode(args):
@@ -250,6 +264,9 @@ Environment Variables:
         print("\nOr create a .env file with:")
         print('  ANTHROPIC_API_KEY=your-key-here')
         return 1
+
+    # Load API-dependent modules
+    _load_api_modules()
 
     # Build configuration
     if args.config:
