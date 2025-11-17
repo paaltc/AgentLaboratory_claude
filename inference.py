@@ -16,6 +16,8 @@ def curr_cost_est():
         "o1-preview": 15.00 / 1000000,
         "o1-mini": 3.00 / 1000000,
         "claude-3-5-sonnet": 3.00 / 1000000,
+        "claude-3-opus": 15.00 / 1000000,
+        "claude-3-haiku": 0.80 / 1000000,
         "deepseek-chat": 1.00 / 1000000,
         "o1": 15.00 / 1000000,
         "o3-mini": 1.10 / 1000000,
@@ -26,6 +28,8 @@ def curr_cost_est():
         "o1-preview": 60.00 / 1000000,
         "o1-mini": 12.00 / 1000000,
         "claude-3-5-sonnet": 12.00 / 1000000,
+        "claude-3-opus": 60.00 / 1000000,
+        "claude-3-haiku": 4.00 / 1000000,
         "deepseek-chat": 5.00 / 1000000,
         "o1": 60.00 / 1000000,
         "o3-mini": 4.40 / 1000000,
@@ -94,10 +98,24 @@ def query_model(model_str, prompt, system_prompt, openai_api_key=None, gemini_ap
                         model="o3-mini-2025-01-31", messages=messages)
                 answer = completion.choices[0].message.content
 
-            elif model_str == "claude-3.5-sonnet":
+            elif model_str == "claude-3.5-sonnet" or model_str == "claude-3-5-sonnet":
                 client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
                 message = client.messages.create(
                     model="claude-3-5-sonnet-latest",
+                    system=system_prompt,
+                    messages=[{"role": "user", "content": prompt}])
+                answer = json.loads(message.to_json())["content"][0]["text"]
+            elif model_str == "claude-3-haiku":
+                client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+                message = client.messages.create(
+                    model="claude-3-haiku-latest",
+                    system=system_prompt,
+                    messages=[{"role": "user", "content": prompt}])
+                answer = json.loads(message.to_json())["content"][0]["text"]
+            elif model_str == "claude-3-opus":
+                client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+                message = client.messages.create(
+                    model="claude-3-opus-latest",
                     system=system_prompt,
                     messages=[{"role": "user", "content": prompt}])
                 answer = json.loads(message.to_json())["content"][0]["text"]
@@ -188,7 +206,7 @@ def query_model(model_str, prompt, system_prompt, openai_api_key=None, gemini_ap
                 answer = completion.choices[0].message.content
 
             try:
-                if model_str in ["o1-preview", "o1-mini", "claude-3.5-sonnet", "o1", "o3-mini"]:
+                if model_str in ["o1-preview", "o1-mini", "claude-3.5-sonnet", "claude-3-5-sonnet", "claude-3-haiku", "claude-3-opus", "o1", "o3-mini"]:
                     encoding = tiktoken.encoding_for_model("gpt-4o")
                 elif model_str in ["deepseek-chat"]:
                     encoding = tiktoken.encoding_for_model("cl100k_base")
