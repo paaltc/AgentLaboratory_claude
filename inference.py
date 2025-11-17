@@ -18,6 +18,8 @@ def curr_cost_est():
         "claude-3-5-sonnet": 3.00 / 1000000,
         "claude-3-opus": 15.00 / 1000000,
         "claude-3-haiku": 0.80 / 1000000,
+        "claude-sonnet-4-5": 3.00 / 1000000,
+        "claude-haiku-4-5": 0.80 / 1000000,
         "deepseek-chat": 1.00 / 1000000,
         "o1": 15.00 / 1000000,
         "o3-mini": 1.10 / 1000000,
@@ -30,6 +32,8 @@ def curr_cost_est():
         "claude-3-5-sonnet": 12.00 / 1000000,
         "claude-3-opus": 60.00 / 1000000,
         "claude-3-haiku": 4.00 / 1000000,
+        "claude-sonnet-4-5": 15.00 / 1000000,
+        "claude-haiku-4-5": 4.00 / 1000000,
         "deepseek-chat": 5.00 / 1000000,
         "o1": 60.00 / 1000000,
         "o3-mini": 4.40 / 1000000,
@@ -116,6 +120,20 @@ def query_model(model_str, prompt, system_prompt, openai_api_key=None, gemini_ap
                 client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
                 message = client.messages.create(
                     model="claude-3-opus-latest",
+                    system=system_prompt,
+                    messages=[{"role": "user", "content": prompt}])
+                answer = json.loads(message.to_json())["content"][0]["text"]
+            elif model_str == "claude-sonnet-4-5" or model_str == "claude-sonnet-4.5":
+                client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+                message = client.messages.create(
+                    model="claude-sonnet-4-5-20250929",
+                    system=system_prompt,
+                    messages=[{"role": "user", "content": prompt}])
+                answer = json.loads(message.to_json())["content"][0]["text"]
+            elif model_str == "claude-haiku-4-5" or model_str == "claude-haiku-4.5":
+                client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+                message = client.messages.create(
+                    model="claude-haiku-4-5-20251001",
                     system=system_prompt,
                     messages=[{"role": "user", "content": prompt}])
                 answer = json.loads(message.to_json())["content"][0]["text"]

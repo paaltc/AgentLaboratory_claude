@@ -1,0 +1,75 @@
+# Agent Laboratory Deployment Configuration
+# Claude Sonnet 4.5 & Haiku 4.5 with Human Oversight
+
+# Human oversight enabled - you will see each phase output and can provide feedback
+copilot-mode: True
+
+# Research topic for this deployment
+research-topic: "Developing novel prompt engineering techniques to improve reasoning on mathematical problem solving"
+
+# Claude API key (set via environment variable ANTHROPIC_API_KEY)
+llm-backend: "claude-sonnet-4-5"
+lit-review-backend: "claude-haiku-4-5"
+
+# Base language
+language: "English"
+
+# Number of papers for literature review
+num-papers-lit-review: 5
+
+# Total number of papers to write in sequence
+num-papers-to-write: 1
+
+# Do you want to run multiple agent labs in parallel?
+parallel-labs: False
+
+# Total mle-solver steps (experiment optimization iterations)
+mlesolver-max-steps: 3
+
+# Total paper-solver steps (paper refinement iterations)
+papersolver-max-steps: 2
+
+# The lab index for this lab (used for parallel runs)
+lab-index: 1
+
+# If you want to load an existing save
+load-existing: False
+
+# If fail, run exception?
+except-if-fail: False
+
+# Compile latex into PDFs during paper-solver
+compile-latex: False
+
+# Task notes for each phase
+task-notes:
+  plan-formulation:
+    - "Create a clear, focused research plan with one main hypothesis"
+    - "Specify exactly what you will implement and test"
+    - "Include concrete metrics for success"
+
+  data-preparation:
+    - "Prepare clean, well-documented code for data loading"
+    - "Ensure all edge cases are handled properly"
+    - "Test the code locally before proceeding"
+
+  running-experiments:
+    - "Run exactly the experiments specified in the plan"
+    - "Track all metrics and results systematically"
+    - "Document any issues or surprises encountered"
+    - "Save all outputs for later analysis"
+
+  results-interpretation:
+    - "Analyze the results in the context of the original hypothesis"
+    - "Discuss both positive findings and limitations"
+    - "Suggest directions for future work"
+
+  report-writing:
+    - "Write a clear, well-structured research paper"
+    - "Include all relevant background and methodology"
+    - "Present results with appropriate visualizations"
+    - "Write a compelling discussion of implications"
+
+  report-refinement:
+    - "Reviewers will evaluate your paper"
+    - "Be prepared to address feedback and revise"
