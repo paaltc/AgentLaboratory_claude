@@ -1,0 +1,545 @@
+{
+  "experiment_name": "Baseline Comparison for IDM-CICDFL",
+  "timestamp": 1763414731.6838744,
+  "test_set_size": 20,
+  "training_set_size": 50,
+  "test_distribution": {
+    "infrastructure": 2,
+    "test": 6,
+    "integration": 3,
+    "compilation": 6,
+    "deployment": 3
+  },
+  "training_distribution": {
+    "compilation": 12,
+    "test": 10,
+    "infrastructure": 9,
+    "deployment": 9,
+    "integration": 10
+  },
+  "baselines": [
+    {
+      "baseline": "Simple Keyword Matching",
+      "total_samples": 20,
+      "correct_predictions": 13,
+      "accuracy": 0.65,
+      "predictions": [
+        {
+          "failure_id": "failure_50",
+          "true_type": "infrastructure",
+          "predicted_type": "infrastructure",
+          "correct": true
+        },
+        {
+          "failure_id": "failure_51",
+          "true_type": "test",
+          "predicted_type": "infrastructure",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_52",
+          "true_type": "integration",
+          "predicted_type": "integration",
+          "correct": true
+        },
+        {
+          "failure_id": "failure_53",
+          "true_type": "compilation",
+          "predicted_type": "compilation",
+          "correct": true
+        },
+        {
+          "failure_id": "failure_54",
+          "true_type": "integration",
+          "predicted_type": "integration",
+          "correct": true
+        },
+        {
+          "failure_id": "failure_55",
+          "true_type": "test",
+          "predicted_type": "infrastructure",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_56",
+          "true_type": "compilation",
+          "predicted_type": "compilation",
+          "correct": true
+        },
+        {
+          "failure_id": "failure_57",
+          "true_type": "compilation",
+          "predicted_type": "compilation",
+          "correct": true
+        },
+        {
+          "failure_id": "failure_58",
+          "true_type": "test",
+          "predicted_type": "test",
+          "correct": true
+        },
+        {
+          "failure_id": "failure_59",
+          "true_type": "test",
+          "predicted_type": "infrastructure",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_60",
+          "true_type": "infrastructure",
+          "predicted_type": "infrastructure",
+          "correct": true
+        },
+        {
+          "failure_id": "failure_61",
+          "true_type": "deployment",
+          "predicted_type": "compilation",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_62",
+          "true_type": "compilation",
+          "predicted_type": "test",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_63",
+          "true_type": "deployment",
+          "predicted_type": "compilation",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_64",
+          "true_type": "compilation",
+          "predicted_type": "compilation",
+          "correct": true
+        },
+        {
+          "failure_id": "failure_65",
+          "true_type": "integration",
+          "predicted_type": "integration",
+          "correct": true
+        },
+        {
+          "failure_id": "failure_66",
+          "true_type": "test",
+          "predicted_type": "infrastructure",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_67",
+          "true_type": "deployment",
+          "predicted_type": "deployment",
+          "correct": true
+        },
+        {
+          "failure_id": "failure_68",
+          "true_type": "test",
+          "predicted_type": "test",
+          "correct": true
+        },
+        {
+          "failure_id": "failure_69",
+          "true_type": "compilation",
+          "predicted_type": "compilation",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "baseline": "Regex Heuristic",
+      "total_samples": 20,
+      "correct_predictions": 13,
+      "accuracy": 0.65,
+      "predictions": [
+        {
+          "failure_id": "failure_50",
+          "true_type": "infrastructure",
+          "predicted_type": "test",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_51",
+          "true_type": "test",
+          "predicted_type": "infrastructure",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_52",
+          "true_type": "integration",
+          "predicted_type": "integration",
+          "correct": true
+        },
+        {
+          "failure_id": "failure_53",
+          "true_type": "compilation",
+          "predicted_type": "compilation",
+          "correct": true
+        },
+        {
+          "failure_id": "failure_54",
+          "true_type": "integration",
+          "predicted_type": "integration",
+          "correct": true
+        },
+        {
+          "failure_id": "failure_55",
+          "true_type": "test",
+          "predicted_type": "infrastructure",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_56",
+          "true_type": "compilation",
+          "predicted_type": "compilation",
+          "correct": true
+        },
+        {
+          "failure_id": "failure_57",
+          "true_type": "compilation",
+          "predicted_type": "test",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_58",
+          "true_type": "test",
+          "predicted_type": "test",
+          "correct": true
+        },
+        {
+          "failure_id": "failure_59",
+          "true_type": "test",
+          "predicted_type": "infrastructure",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_60",
+          "true_type": "infrastructure",
+          "predicted_type": "infrastructure",
+          "correct": true
+        },
+        {
+          "failure_id": "failure_61",
+          "true_type": "deployment",
+          "predicted_type": "deployment",
+          "correct": true
+        },
+        {
+          "failure_id": "failure_62",
+          "true_type": "compilation",
+          "predicted_type": "test",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_63",
+          "true_type": "deployment",
+          "predicted_type": "deployment",
+          "correct": true
+        },
+        {
+          "failure_id": "failure_64",
+          "true_type": "compilation",
+          "predicted_type": "compilation",
+          "correct": true
+        },
+        {
+          "failure_id": "failure_65",
+          "true_type": "integration",
+          "predicted_type": "integration",
+          "correct": true
+        },
+        {
+          "failure_id": "failure_66",
+          "true_type": "test",
+          "predicted_type": "infrastructure",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_67",
+          "true_type": "deployment",
+          "predicted_type": "deployment",
+          "correct": true
+        },
+        {
+          "failure_id": "failure_68",
+          "true_type": "test",
+          "predicted_type": "test",
+          "correct": true
+        },
+        {
+          "failure_id": "failure_69",
+          "true_type": "compilation",
+          "predicted_type": "compilation",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "baseline": "Random Classifier",
+      "total_samples": 20,
+      "correct_predictions": 4,
+      "accuracy": 0.2,
+      "predictions": [
+        {
+          "failure_id": "failure_50",
+          "true_type": "infrastructure",
+          "predicted_type": "compilation",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_51",
+          "true_type": "test",
+          "predicted_type": "compilation",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_52",
+          "true_type": "integration",
+          "predicted_type": "integration",
+          "correct": true
+        },
+        {
+          "failure_id": "failure_53",
+          "true_type": "compilation",
+          "predicted_type": "test",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_54",
+          "true_type": "integration",
+          "predicted_type": "test",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_55",
+          "true_type": "test",
+          "predicted_type": "test",
+          "correct": true
+        },
+        {
+          "failure_id": "failure_56",
+          "true_type": "compilation",
+          "predicted_type": "compilation",
+          "correct": true
+        },
+        {
+          "failure_id": "failure_57",
+          "true_type": "compilation",
+          "predicted_type": "infrastructure",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_58",
+          "true_type": "test",
+          "predicted_type": "compilation",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_59",
+          "true_type": "test",
+          "predicted_type": "infrastructure",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_60",
+          "true_type": "infrastructure",
+          "predicted_type": "deployment",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_61",
+          "true_type": "deployment",
+          "predicted_type": "compilation",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_62",
+          "true_type": "compilation",
+          "predicted_type": "compilation",
+          "correct": true
+        },
+        {
+          "failure_id": "failure_63",
+          "true_type": "deployment",
+          "predicted_type": "compilation",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_64",
+          "true_type": "compilation",
+          "predicted_type": "test",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_65",
+          "true_type": "integration",
+          "predicted_type": "test",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_66",
+          "true_type": "test",
+          "predicted_type": "infrastructure",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_67",
+          "true_type": "deployment",
+          "predicted_type": "infrastructure",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_68",
+          "true_type": "test",
+          "predicted_type": "compilation",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_69",
+          "true_type": "compilation",
+          "predicted_type": "infrastructure",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "baseline": "Majority Class",
+      "total_samples": 20,
+      "correct_predictions": 6,
+      "accuracy": 0.3,
+      "majority_class": "compilation",
+      "class_distribution": {
+        "compilation": 12,
+        "test": 10,
+        "infrastructure": 9,
+        "deployment": 9,
+        "integration": 10
+      },
+      "predictions": [
+        {
+          "failure_id": "failure_50",
+          "true_type": "infrastructure",
+          "predicted_type": "compilation",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_51",
+          "true_type": "test",
+          "predicted_type": "compilation",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_52",
+          "true_type": "integration",
+          "predicted_type": "compilation",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_53",
+          "true_type": "compilation",
+          "predicted_type": "compilation",
+          "correct": true
+        },
+        {
+          "failure_id": "failure_54",
+          "true_type": "integration",
+          "predicted_type": "compilation",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_55",
+          "true_type": "test",
+          "predicted_type": "compilation",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_56",
+          "true_type": "compilation",
+          "predicted_type": "compilation",
+          "correct": true
+        },
+        {
+          "failure_id": "failure_57",
+          "true_type": "compilation",
+          "predicted_type": "compilation",
+          "correct": true
+        },
+        {
+          "failure_id": "failure_58",
+          "true_type": "test",
+          "predicted_type": "compilation",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_59",
+          "true_type": "test",
+          "predicted_type": "compilation",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_60",
+          "true_type": "infrastructure",
+          "predicted_type": "compilation",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_61",
+          "true_type": "deployment",
+          "predicted_type": "compilation",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_62",
+          "true_type": "compilation",
+          "predicted_type": "compilation",
+          "correct": true
+        },
+        {
+          "failure_id": "failure_63",
+          "true_type": "deployment",
+          "predicted_type": "compilation",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_64",
+          "true_type": "compilation",
+          "predicted_type": "compilation",
+          "correct": true
+        },
+        {
+          "failure_id": "failure_65",
+          "true_type": "integration",
+          "predicted_type": "compilation",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_66",
+          "true_type": "test",
+          "predicted_type": "compilation",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_67",
+          "true_type": "deployment",
+          "predicted_type": "compilation",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_68",
+          "true_type": "test",
+          "predicted_type": "compilation",
+          "correct": false
+        },
+        {
+          "failure_id": "failure_69",
+          "true_type": "compilation",
+          "predicted_type": "compilation",
+          "correct": true
+        }
+      ]
+    }
+  ],
+  "idm_cicdfl_accuracy": 0.55,
+  "idm_cicdfl_correct": 11,
+  "idm_cicdfl_total": 20
+}

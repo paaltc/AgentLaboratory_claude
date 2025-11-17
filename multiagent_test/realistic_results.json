@@ -1,0 +1,1965 @@
+{
+  "experiment_name": "Realistic CI/CD Failure Evaluation",
+  "timestamp": 1763415089.497552,
+  "dataset_size": 50,
+  "dataset_characteristics": {
+    "failure_type_distribution": {
+      "compilation": 10,
+      "test": 10,
+      "infrastructure": 10,
+      "integration": 10,
+      "deployment": 10
+    },
+    "cascading_complexity_distribution": {
+      "2": 20,
+      "3": 30
+    },
+    "average_error_message_length": 255.38
+  },
+  "systems": [
+    {
+      "system": "Simple Keyword Matching",
+      "total_samples": 50,
+      "correct_predictions": 26,
+      "accuracy": 0.52,
+      "predictions": [
+        {
+          "failure_id": "realistic_failure_0",
+          "true_type": "compilation",
+          "predicted_type": "compilation",
+          "correct": true,
+          "primary_layer": "build",
+          "affected_layers": [
+            "application",
+            "build"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_1",
+          "true_type": "compilation",
+          "predicted_type": "compilation",
+          "correct": true,
+          "primary_layer": "build",
+          "affected_layers": [
+            "application",
+            "build"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_2",
+          "true_type": "compilation",
+          "predicted_type": "compilation",
+          "correct": true,
+          "primary_layer": "build",
+          "affected_layers": [
+            "application",
+            "build"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_3",
+          "true_type": "compilation",
+          "predicted_type": "compilation",
+          "correct": true,
+          "primary_layer": "build",
+          "affected_layers": [
+            "application",
+            "build"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_4",
+          "true_type": "compilation",
+          "predicted_type": "compilation",
+          "correct": true,
+          "primary_layer": "build",
+          "affected_layers": [
+            "application",
+            "build"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_5",
+          "true_type": "test",
+          "predicted_type": "infrastructure",
+          "correct": false,
+          "primary_layer": "test",
+          "affected_layers": [
+            "application",
+            "test",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_6",
+          "true_type": "test",
+          "predicted_type": "infrastructure",
+          "correct": false,
+          "primary_layer": "test",
+          "affected_layers": [
+            "application",
+            "test",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_7",
+          "true_type": "test",
+          "predicted_type": "infrastructure",
+          "correct": false,
+          "primary_layer": "test",
+          "affected_layers": [
+            "application",
+            "test",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_8",
+          "true_type": "test",
+          "predicted_type": "test",
+          "correct": true,
+          "primary_layer": "test",
+          "affected_layers": [
+            "application",
+            "test",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_9",
+          "true_type": "test",
+          "predicted_type": "test",
+          "correct": true,
+          "primary_layer": "test",
+          "affected_layers": [
+            "application",
+            "test",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_10",
+          "true_type": "infrastructure",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "infrastructure",
+          "affected_layers": [
+            "infrastructure",
+            "test",
+            "build"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_11",
+          "true_type": "infrastructure",
+          "predicted_type": "infrastructure",
+          "correct": true,
+          "primary_layer": "infrastructure",
+          "affected_layers": [
+            "infrastructure",
+            "test",
+            "build"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_12",
+          "true_type": "infrastructure",
+          "predicted_type": "infrastructure",
+          "correct": true,
+          "primary_layer": "infrastructure",
+          "affected_layers": [
+            "infrastructure",
+            "test",
+            "build"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_13",
+          "true_type": "infrastructure",
+          "predicted_type": "infrastructure",
+          "correct": true,
+          "primary_layer": "infrastructure",
+          "affected_layers": [
+            "infrastructure",
+            "test",
+            "build"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_14",
+          "true_type": "infrastructure",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "infrastructure",
+          "affected_layers": [
+            "infrastructure",
+            "test",
+            "build"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_15",
+          "true_type": "compilation",
+          "predicted_type": "infrastructure",
+          "correct": false,
+          "primary_layer": "build",
+          "affected_layers": [
+            "build",
+            "deployment",
+            "application"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_16",
+          "true_type": "compilation",
+          "predicted_type": "infrastructure",
+          "correct": false,
+          "primary_layer": "build",
+          "affected_layers": [
+            "build",
+            "deployment",
+            "application"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_17",
+          "true_type": "compilation",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "build",
+          "affected_layers": [
+            "build",
+            "deployment",
+            "application"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_18",
+          "true_type": "compilation",
+          "predicted_type": "compilation",
+          "correct": true,
+          "primary_layer": "build",
+          "affected_layers": [
+            "build",
+            "deployment",
+            "application"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_19",
+          "true_type": "compilation",
+          "predicted_type": "compilation",
+          "correct": true,
+          "primary_layer": "build",
+          "affected_layers": [
+            "build",
+            "deployment",
+            "application"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_20",
+          "true_type": "integration",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "test",
+          "affected_layers": [
+            "infrastructure",
+            "test",
+            "deployment"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_21",
+          "true_type": "integration",
+          "predicted_type": "integration",
+          "correct": true,
+          "primary_layer": "test",
+          "affected_layers": [
+            "infrastructure",
+            "test",
+            "deployment"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_22",
+          "true_type": "integration",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "test",
+          "affected_layers": [
+            "infrastructure",
+            "test",
+            "deployment"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_23",
+          "true_type": "integration",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "test",
+          "affected_layers": [
+            "infrastructure",
+            "test",
+            "deployment"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_24",
+          "true_type": "integration",
+          "predicted_type": "integration",
+          "correct": true,
+          "primary_layer": "test",
+          "affected_layers": [
+            "infrastructure",
+            "test",
+            "deployment"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_25",
+          "true_type": "infrastructure",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "infrastructure",
+          "affected_layers": [
+            "infrastructure",
+            "test"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_26",
+          "true_type": "infrastructure",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "infrastructure",
+          "affected_layers": [
+            "infrastructure",
+            "test"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_27",
+          "true_type": "infrastructure",
+          "predicted_type": "infrastructure",
+          "correct": true,
+          "primary_layer": "infrastructure",
+          "affected_layers": [
+            "infrastructure",
+            "test"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_28",
+          "true_type": "infrastructure",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "infrastructure",
+          "affected_layers": [
+            "infrastructure",
+            "test"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_29",
+          "true_type": "infrastructure",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "infrastructure",
+          "affected_layers": [
+            "infrastructure",
+            "test"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_30",
+          "true_type": "integration",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "test",
+          "affected_layers": [
+            "infrastructure",
+            "test"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_31",
+          "true_type": "integration",
+          "predicted_type": "integration",
+          "correct": true,
+          "primary_layer": "test",
+          "affected_layers": [
+            "infrastructure",
+            "test"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_32",
+          "true_type": "integration",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "test",
+          "affected_layers": [
+            "infrastructure",
+            "test"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_33",
+          "true_type": "integration",
+          "predicted_type": "integration",
+          "correct": true,
+          "primary_layer": "test",
+          "affected_layers": [
+            "infrastructure",
+            "test"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_34",
+          "true_type": "integration",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "test",
+          "affected_layers": [
+            "infrastructure",
+            "test"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_35",
+          "true_type": "test",
+          "predicted_type": "test",
+          "correct": true,
+          "primary_layer": "test",
+          "affected_layers": [
+            "application",
+            "test",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_36",
+          "true_type": "test",
+          "predicted_type": "test",
+          "correct": true,
+          "primary_layer": "test",
+          "affected_layers": [
+            "application",
+            "test",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_37",
+          "true_type": "test",
+          "predicted_type": "infrastructure",
+          "correct": false,
+          "primary_layer": "test",
+          "affected_layers": [
+            "application",
+            "test",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_38",
+          "true_type": "test",
+          "predicted_type": "test",
+          "correct": true,
+          "primary_layer": "test",
+          "affected_layers": [
+            "application",
+            "test",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_39",
+          "true_type": "test",
+          "predicted_type": "test",
+          "correct": true,
+          "primary_layer": "test",
+          "affected_layers": [
+            "application",
+            "test",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_40",
+          "true_type": "deployment",
+          "predicted_type": "deployment",
+          "correct": true,
+          "primary_layer": "deployment",
+          "affected_layers": [
+            "build",
+            "deployment",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_41",
+          "true_type": "deployment",
+          "predicted_type": "deployment",
+          "correct": true,
+          "primary_layer": "deployment",
+          "affected_layers": [
+            "build",
+            "deployment",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_42",
+          "true_type": "deployment",
+          "predicted_type": "deployment",
+          "correct": true,
+          "primary_layer": "deployment",
+          "affected_layers": [
+            "build",
+            "deployment",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_43",
+          "true_type": "deployment",
+          "predicted_type": "deployment",
+          "correct": true,
+          "primary_layer": "deployment",
+          "affected_layers": [
+            "build",
+            "deployment",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_44",
+          "true_type": "deployment",
+          "predicted_type": "deployment",
+          "correct": true,
+          "primary_layer": "deployment",
+          "affected_layers": [
+            "build",
+            "deployment",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_45",
+          "true_type": "deployment",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "deployment",
+          "affected_layers": [
+            "deployment",
+            "application"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_46",
+          "true_type": "deployment",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "deployment",
+          "affected_layers": [
+            "deployment",
+            "application"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_47",
+          "true_type": "deployment",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "deployment",
+          "affected_layers": [
+            "deployment",
+            "application"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_48",
+          "true_type": "deployment",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "deployment",
+          "affected_layers": [
+            "deployment",
+            "application"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_49",
+          "true_type": "deployment",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "deployment",
+          "affected_layers": [
+            "deployment",
+            "application"
+          ],
+          "cascading_complexity": 2
+        }
+      ],
+      "performance_by_complexity": {
+        "complexity_2": {
+          "accuracy": 0.4,
+          "samples": 20
+        },
+        "complexity_3": {
+          "accuracy": 0.6,
+          "samples": 30
+        }
+      }
+    },
+    {
+      "system": "Regex Heuristic",
+      "total_samples": 50,
+      "correct_predictions": 17,
+      "accuracy": 0.34,
+      "predictions": [
+        {
+          "failure_id": "realistic_failure_0",
+          "true_type": "compilation",
+          "predicted_type": "infrastructure",
+          "correct": false,
+          "primary_layer": "build",
+          "affected_layers": [
+            "application",
+            "build"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_1",
+          "true_type": "compilation",
+          "predicted_type": "infrastructure",
+          "correct": false,
+          "primary_layer": "build",
+          "affected_layers": [
+            "application",
+            "build"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_2",
+          "true_type": "compilation",
+          "predicted_type": "infrastructure",
+          "correct": false,
+          "primary_layer": "build",
+          "affected_layers": [
+            "application",
+            "build"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_3",
+          "true_type": "compilation",
+          "predicted_type": "infrastructure",
+          "correct": false,
+          "primary_layer": "build",
+          "affected_layers": [
+            "application",
+            "build"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_4",
+          "true_type": "compilation",
+          "predicted_type": "infrastructure",
+          "correct": false,
+          "primary_layer": "build",
+          "affected_layers": [
+            "application",
+            "build"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_5",
+          "true_type": "test",
+          "predicted_type": "infrastructure",
+          "correct": false,
+          "primary_layer": "test",
+          "affected_layers": [
+            "application",
+            "test",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_6",
+          "true_type": "test",
+          "predicted_type": "infrastructure",
+          "correct": false,
+          "primary_layer": "test",
+          "affected_layers": [
+            "application",
+            "test",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_7",
+          "true_type": "test",
+          "predicted_type": "infrastructure",
+          "correct": false,
+          "primary_layer": "test",
+          "affected_layers": [
+            "application",
+            "test",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_8",
+          "true_type": "test",
+          "predicted_type": "infrastructure",
+          "correct": false,
+          "primary_layer": "test",
+          "affected_layers": [
+            "application",
+            "test",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_9",
+          "true_type": "test",
+          "predicted_type": "test",
+          "correct": true,
+          "primary_layer": "test",
+          "affected_layers": [
+            "application",
+            "test",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_10",
+          "true_type": "infrastructure",
+          "predicted_type": "infrastructure",
+          "correct": true,
+          "primary_layer": "infrastructure",
+          "affected_layers": [
+            "infrastructure",
+            "test",
+            "build"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_11",
+          "true_type": "infrastructure",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "infrastructure",
+          "affected_layers": [
+            "infrastructure",
+            "test",
+            "build"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_12",
+          "true_type": "infrastructure",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "infrastructure",
+          "affected_layers": [
+            "infrastructure",
+            "test",
+            "build"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_13",
+          "true_type": "infrastructure",
+          "predicted_type": "infrastructure",
+          "correct": true,
+          "primary_layer": "infrastructure",
+          "affected_layers": [
+            "infrastructure",
+            "test",
+            "build"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_14",
+          "true_type": "infrastructure",
+          "predicted_type": "infrastructure",
+          "correct": true,
+          "primary_layer": "infrastructure",
+          "affected_layers": [
+            "infrastructure",
+            "test",
+            "build"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_15",
+          "true_type": "compilation",
+          "predicted_type": "infrastructure",
+          "correct": false,
+          "primary_layer": "build",
+          "affected_layers": [
+            "build",
+            "deployment",
+            "application"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_16",
+          "true_type": "compilation",
+          "predicted_type": "infrastructure",
+          "correct": false,
+          "primary_layer": "build",
+          "affected_layers": [
+            "build",
+            "deployment",
+            "application"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_17",
+          "true_type": "compilation",
+          "predicted_type": "deployment",
+          "correct": false,
+          "primary_layer": "build",
+          "affected_layers": [
+            "build",
+            "deployment",
+            "application"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_18",
+          "true_type": "compilation",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "build",
+          "affected_layers": [
+            "build",
+            "deployment",
+            "application"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_19",
+          "true_type": "compilation",
+          "predicted_type": "deployment",
+          "correct": false,
+          "primary_layer": "build",
+          "affected_layers": [
+            "build",
+            "deployment",
+            "application"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_20",
+          "true_type": "integration",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "test",
+          "affected_layers": [
+            "infrastructure",
+            "test",
+            "deployment"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_21",
+          "true_type": "integration",
+          "predicted_type": "integration",
+          "correct": true,
+          "primary_layer": "test",
+          "affected_layers": [
+            "infrastructure",
+            "test",
+            "deployment"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_22",
+          "true_type": "integration",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "test",
+          "affected_layers": [
+            "infrastructure",
+            "test",
+            "deployment"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_23",
+          "true_type": "integration",
+          "predicted_type": "integration",
+          "correct": true,
+          "primary_layer": "test",
+          "affected_layers": [
+            "infrastructure",
+            "test",
+            "deployment"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_24",
+          "true_type": "integration",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "test",
+          "affected_layers": [
+            "infrastructure",
+            "test",
+            "deployment"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_25",
+          "true_type": "infrastructure",
+          "predicted_type": "infrastructure",
+          "correct": true,
+          "primary_layer": "infrastructure",
+          "affected_layers": [
+            "infrastructure",
+            "test"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_26",
+          "true_type": "infrastructure",
+          "predicted_type": "infrastructure",
+          "correct": true,
+          "primary_layer": "infrastructure",
+          "affected_layers": [
+            "infrastructure",
+            "test"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_27",
+          "true_type": "infrastructure",
+          "predicted_type": "infrastructure",
+          "correct": true,
+          "primary_layer": "infrastructure",
+          "affected_layers": [
+            "infrastructure",
+            "test"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_28",
+          "true_type": "infrastructure",
+          "predicted_type": "infrastructure",
+          "correct": true,
+          "primary_layer": "infrastructure",
+          "affected_layers": [
+            "infrastructure",
+            "test"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_29",
+          "true_type": "infrastructure",
+          "predicted_type": "infrastructure",
+          "correct": true,
+          "primary_layer": "infrastructure",
+          "affected_layers": [
+            "infrastructure",
+            "test"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_30",
+          "true_type": "integration",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "test",
+          "affected_layers": [
+            "infrastructure",
+            "test"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_31",
+          "true_type": "integration",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "test",
+          "affected_layers": [
+            "infrastructure",
+            "test"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_32",
+          "true_type": "integration",
+          "predicted_type": "deployment",
+          "correct": false,
+          "primary_layer": "test",
+          "affected_layers": [
+            "infrastructure",
+            "test"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_33",
+          "true_type": "integration",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "test",
+          "affected_layers": [
+            "infrastructure",
+            "test"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_34",
+          "true_type": "integration",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "test",
+          "affected_layers": [
+            "infrastructure",
+            "test"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_35",
+          "true_type": "test",
+          "predicted_type": "infrastructure",
+          "correct": false,
+          "primary_layer": "test",
+          "affected_layers": [
+            "application",
+            "test",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_36",
+          "true_type": "test",
+          "predicted_type": "infrastructure",
+          "correct": false,
+          "primary_layer": "test",
+          "affected_layers": [
+            "application",
+            "test",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_37",
+          "true_type": "test",
+          "predicted_type": "infrastructure",
+          "correct": false,
+          "primary_layer": "test",
+          "affected_layers": [
+            "application",
+            "test",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_38",
+          "true_type": "test",
+          "predicted_type": "test",
+          "correct": true,
+          "primary_layer": "test",
+          "affected_layers": [
+            "application",
+            "test",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_39",
+          "true_type": "test",
+          "predicted_type": "test",
+          "correct": true,
+          "primary_layer": "test",
+          "affected_layers": [
+            "application",
+            "test",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_40",
+          "true_type": "deployment",
+          "predicted_type": "infrastructure",
+          "correct": false,
+          "primary_layer": "deployment",
+          "affected_layers": [
+            "build",
+            "deployment",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_41",
+          "true_type": "deployment",
+          "predicted_type": "deployment",
+          "correct": true,
+          "primary_layer": "deployment",
+          "affected_layers": [
+            "build",
+            "deployment",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_42",
+          "true_type": "deployment",
+          "predicted_type": "deployment",
+          "correct": true,
+          "primary_layer": "deployment",
+          "affected_layers": [
+            "build",
+            "deployment",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_43",
+          "true_type": "deployment",
+          "predicted_type": "deployment",
+          "correct": true,
+          "primary_layer": "deployment",
+          "affected_layers": [
+            "build",
+            "deployment",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_44",
+          "true_type": "deployment",
+          "predicted_type": "deployment",
+          "correct": true,
+          "primary_layer": "deployment",
+          "affected_layers": [
+            "build",
+            "deployment",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_45",
+          "true_type": "deployment",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "deployment",
+          "affected_layers": [
+            "deployment",
+            "application"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_46",
+          "true_type": "deployment",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "deployment",
+          "affected_layers": [
+            "deployment",
+            "application"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_47",
+          "true_type": "deployment",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "deployment",
+          "affected_layers": [
+            "deployment",
+            "application"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_48",
+          "true_type": "deployment",
+          "predicted_type": "infrastructure",
+          "correct": false,
+          "primary_layer": "deployment",
+          "affected_layers": [
+            "deployment",
+            "application"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_49",
+          "true_type": "deployment",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "deployment",
+          "affected_layers": [
+            "deployment",
+            "application"
+          ],
+          "cascading_complexity": 2
+        }
+      ],
+      "performance_by_complexity": {
+        "complexity_2": {
+          "accuracy": 0.25,
+          "samples": 20
+        },
+        "complexity_3": {
+          "accuracy": 0.4,
+          "samples": 30
+        }
+      }
+    },
+    {
+      "system": "Hierarchical Analysis (IDM-CICDFL)",
+      "total_samples": 50,
+      "correct_predictions": 40,
+      "accuracy": 0.8,
+      "predictions": [
+        {
+          "failure_id": "realistic_failure_0",
+          "true_type": "compilation",
+          "predicted_type": "compilation",
+          "correct": true,
+          "primary_layer": "build",
+          "affected_layers": [
+            "application",
+            "build"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_1",
+          "true_type": "compilation",
+          "predicted_type": "compilation",
+          "correct": true,
+          "primary_layer": "build",
+          "affected_layers": [
+            "application",
+            "build"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_2",
+          "true_type": "compilation",
+          "predicted_type": "compilation",
+          "correct": true,
+          "primary_layer": "build",
+          "affected_layers": [
+            "application",
+            "build"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_3",
+          "true_type": "compilation",
+          "predicted_type": "compilation",
+          "correct": true,
+          "primary_layer": "build",
+          "affected_layers": [
+            "application",
+            "build"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_4",
+          "true_type": "compilation",
+          "predicted_type": "compilation",
+          "correct": true,
+          "primary_layer": "build",
+          "affected_layers": [
+            "application",
+            "build"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_5",
+          "true_type": "test",
+          "predicted_type": "test",
+          "correct": true,
+          "primary_layer": "test",
+          "affected_layers": [
+            "application",
+            "test",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_6",
+          "true_type": "test",
+          "predicted_type": "test",
+          "correct": true,
+          "primary_layer": "test",
+          "affected_layers": [
+            "application",
+            "test",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_7",
+          "true_type": "test",
+          "predicted_type": "test",
+          "correct": true,
+          "primary_layer": "test",
+          "affected_layers": [
+            "application",
+            "test",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_8",
+          "true_type": "test",
+          "predicted_type": "test",
+          "correct": true,
+          "primary_layer": "test",
+          "affected_layers": [
+            "application",
+            "test",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_9",
+          "true_type": "test",
+          "predicted_type": "test",
+          "correct": true,
+          "primary_layer": "test",
+          "affected_layers": [
+            "application",
+            "test",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_10",
+          "true_type": "infrastructure",
+          "predicted_type": "infrastructure",
+          "correct": true,
+          "primary_layer": "infrastructure",
+          "affected_layers": [
+            "infrastructure",
+            "test",
+            "build"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_11",
+          "true_type": "infrastructure",
+          "predicted_type": "infrastructure",
+          "correct": true,
+          "primary_layer": "infrastructure",
+          "affected_layers": [
+            "infrastructure",
+            "test",
+            "build"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_12",
+          "true_type": "infrastructure",
+          "predicted_type": "infrastructure",
+          "correct": true,
+          "primary_layer": "infrastructure",
+          "affected_layers": [
+            "infrastructure",
+            "test",
+            "build"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_13",
+          "true_type": "infrastructure",
+          "predicted_type": "infrastructure",
+          "correct": true,
+          "primary_layer": "infrastructure",
+          "affected_layers": [
+            "infrastructure",
+            "test",
+            "build"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_14",
+          "true_type": "infrastructure",
+          "predicted_type": "infrastructure",
+          "correct": true,
+          "primary_layer": "infrastructure",
+          "affected_layers": [
+            "infrastructure",
+            "test",
+            "build"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_15",
+          "true_type": "compilation",
+          "predicted_type": "compilation",
+          "correct": true,
+          "primary_layer": "build",
+          "affected_layers": [
+            "build",
+            "deployment",
+            "application"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_16",
+          "true_type": "compilation",
+          "predicted_type": "compilation",
+          "correct": true,
+          "primary_layer": "build",
+          "affected_layers": [
+            "build",
+            "deployment",
+            "application"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_17",
+          "true_type": "compilation",
+          "predicted_type": "compilation",
+          "correct": true,
+          "primary_layer": "build",
+          "affected_layers": [
+            "build",
+            "deployment",
+            "application"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_18",
+          "true_type": "compilation",
+          "predicted_type": "compilation",
+          "correct": true,
+          "primary_layer": "build",
+          "affected_layers": [
+            "build",
+            "deployment",
+            "application"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_19",
+          "true_type": "compilation",
+          "predicted_type": "compilation",
+          "correct": true,
+          "primary_layer": "build",
+          "affected_layers": [
+            "build",
+            "deployment",
+            "application"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_20",
+          "true_type": "integration",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "test",
+          "affected_layers": [
+            "infrastructure",
+            "test",
+            "deployment"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_21",
+          "true_type": "integration",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "test",
+          "affected_layers": [
+            "infrastructure",
+            "test",
+            "deployment"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_22",
+          "true_type": "integration",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "test",
+          "affected_layers": [
+            "infrastructure",
+            "test",
+            "deployment"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_23",
+          "true_type": "integration",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "test",
+          "affected_layers": [
+            "infrastructure",
+            "test",
+            "deployment"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_24",
+          "true_type": "integration",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "test",
+          "affected_layers": [
+            "infrastructure",
+            "test",
+            "deployment"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_25",
+          "true_type": "infrastructure",
+          "predicted_type": "infrastructure",
+          "correct": true,
+          "primary_layer": "infrastructure",
+          "affected_layers": [
+            "infrastructure",
+            "test"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_26",
+          "true_type": "infrastructure",
+          "predicted_type": "infrastructure",
+          "correct": true,
+          "primary_layer": "infrastructure",
+          "affected_layers": [
+            "infrastructure",
+            "test"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_27",
+          "true_type": "infrastructure",
+          "predicted_type": "infrastructure",
+          "correct": true,
+          "primary_layer": "infrastructure",
+          "affected_layers": [
+            "infrastructure",
+            "test"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_28",
+          "true_type": "infrastructure",
+          "predicted_type": "infrastructure",
+          "correct": true,
+          "primary_layer": "infrastructure",
+          "affected_layers": [
+            "infrastructure",
+            "test"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_29",
+          "true_type": "infrastructure",
+          "predicted_type": "infrastructure",
+          "correct": true,
+          "primary_layer": "infrastructure",
+          "affected_layers": [
+            "infrastructure",
+            "test"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_30",
+          "true_type": "integration",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "test",
+          "affected_layers": [
+            "infrastructure",
+            "test"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_31",
+          "true_type": "integration",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "test",
+          "affected_layers": [
+            "infrastructure",
+            "test"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_32",
+          "true_type": "integration",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "test",
+          "affected_layers": [
+            "infrastructure",
+            "test"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_33",
+          "true_type": "integration",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "test",
+          "affected_layers": [
+            "infrastructure",
+            "test"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_34",
+          "true_type": "integration",
+          "predicted_type": "test",
+          "correct": false,
+          "primary_layer": "test",
+          "affected_layers": [
+            "infrastructure",
+            "test"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_35",
+          "true_type": "test",
+          "predicted_type": "test",
+          "correct": true,
+          "primary_layer": "test",
+          "affected_layers": [
+            "application",
+            "test",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_36",
+          "true_type": "test",
+          "predicted_type": "test",
+          "correct": true,
+          "primary_layer": "test",
+          "affected_layers": [
+            "application",
+            "test",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_37",
+          "true_type": "test",
+          "predicted_type": "test",
+          "correct": true,
+          "primary_layer": "test",
+          "affected_layers": [
+            "application",
+            "test",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_38",
+          "true_type": "test",
+          "predicted_type": "test",
+          "correct": true,
+          "primary_layer": "test",
+          "affected_layers": [
+            "application",
+            "test",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_39",
+          "true_type": "test",
+          "predicted_type": "test",
+          "correct": true,
+          "primary_layer": "test",
+          "affected_layers": [
+            "application",
+            "test",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_40",
+          "true_type": "deployment",
+          "predicted_type": "deployment",
+          "correct": true,
+          "primary_layer": "deployment",
+          "affected_layers": [
+            "build",
+            "deployment",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_41",
+          "true_type": "deployment",
+          "predicted_type": "deployment",
+          "correct": true,
+          "primary_layer": "deployment",
+          "affected_layers": [
+            "build",
+            "deployment",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_42",
+          "true_type": "deployment",
+          "predicted_type": "deployment",
+          "correct": true,
+          "primary_layer": "deployment",
+          "affected_layers": [
+            "build",
+            "deployment",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_43",
+          "true_type": "deployment",
+          "predicted_type": "deployment",
+          "correct": true,
+          "primary_layer": "deployment",
+          "affected_layers": [
+            "build",
+            "deployment",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_44",
+          "true_type": "deployment",
+          "predicted_type": "deployment",
+          "correct": true,
+          "primary_layer": "deployment",
+          "affected_layers": [
+            "build",
+            "deployment",
+            "infrastructure"
+          ],
+          "cascading_complexity": 3
+        },
+        {
+          "failure_id": "realistic_failure_45",
+          "true_type": "deployment",
+          "predicted_type": "deployment",
+          "correct": true,
+          "primary_layer": "deployment",
+          "affected_layers": [
+            "deployment",
+            "application"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_46",
+          "true_type": "deployment",
+          "predicted_type": "deployment",
+          "correct": true,
+          "primary_layer": "deployment",
+          "affected_layers": [
+            "deployment",
+            "application"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_47",
+          "true_type": "deployment",
+          "predicted_type": "deployment",
+          "correct": true,
+          "primary_layer": "deployment",
+          "affected_layers": [
+            "deployment",
+            "application"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_48",
+          "true_type": "deployment",
+          "predicted_type": "deployment",
+          "correct": true,
+          "primary_layer": "deployment",
+          "affected_layers": [
+            "deployment",
+            "application"
+          ],
+          "cascading_complexity": 2
+        },
+        {
+          "failure_id": "realistic_failure_49",
+          "true_type": "deployment",
+          "predicted_type": "deployment",
+          "correct": true,
+          "primary_layer": "deployment",
+          "affected_layers": [
+            "deployment",
+            "application"
+          ],
+          "cascading_complexity": 2
+        }
+      ],
+      "performance_by_complexity": {
+        "complexity_2": {
+          "accuracy": 0.75,
+          "samples": 20
+        },
+        "complexity_3": {
+          "accuracy": 0.8333333333333334,
+          "samples": 30
+        }
+      }
+    }
+  ]
+}
