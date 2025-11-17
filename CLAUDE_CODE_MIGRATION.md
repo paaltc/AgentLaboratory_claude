@@ -11,12 +11,15 @@ The migration replaces the multi-model LLM backend (OpenAI, DeepSeek, Gemini) wi
 ### Core Components
 
 ```
-claude_inference.py    - Anthropic Claude API client with cost tracking
-claude_tools.py        - Tool definitions and executor for research tasks
-claude_agents.py       - Agent system using Claude's native capabilities
-claude_workflow.py     - Main research workflow orchestrator
-claude_config.py       - Configuration management
-run_claude_research.py - CLI entry point
+claude_inference.py      - Anthropic Claude API client with cost tracking
+claude_tools.py          - Tool definitions and executor for research tasks
+claude_agents.py         - Agent system using Claude's native capabilities
+claude_workflow.py       - Main research workflow orchestrator
+claude_config.py         - Configuration management
+run_claude_research.py   - CLI entry point
+claude_native_runner.py  - Native mode runner (no API key needed)
+claude_interactive.py    - Interactive research runner
+.claude/commands/        - Slash commands for Claude Code
 ```
 
 ### Migration Mapping
@@ -31,15 +34,34 @@ run_claude_research.py - CLI entry point
 
 ## Quick Start
 
-### 1. Set up your API key
+### Option 1: Native Mode (Claude Pro - No API Key Required)
+
+Run directly within Claude Code without needing an API key:
+
+```bash
+# Start a research workflow
+python run_claude_research.py --topic "Few-shot learning in NLP" --no-api
+
+# Check workflow status
+python run_claude_research.py --topic "Few-shot learning" --no-api --status
+
+# Reset and start over
+python run_claude_research.py --topic "Few-shot learning" --no-api --reset
+
+# Interactive mode
+python claude_interactive.py --topic "Few-shot learning" --phase literature
+```
+
+Or use the slash command:
+```
+/research Few-shot learning in NLP
+```
+
+### Option 2: API Mode (Requires ANTHROPIC_API_KEY)
 
 ```bash
 export ANTHROPIC_API_KEY="your-anthropic-api-key"
-```
 
-### 2. Run research
-
-```bash
 # Basic usage
 python run_claude_research.py --topic "Few-shot learning in NLP"
 

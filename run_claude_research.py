@@ -11,6 +11,65 @@ from pathlib import Path
 from claude_config import ResearchConfig, load_environment_config, create_default_config
 from claude_workflow import ClaudeResearchWorkflow
 from claude_inference import get_current_cost, get_token_stats
+from claude_native_runner import ClaudeNativeWorkflow, print_claude_code_instructions
+
+
+def run_native_mode(args):
+    """
+    Run in Claude Code native mode (no API key needed).
+
+    This mode generates tasks that Claude Code executes using its native tools.
+    """
+    if not args.topic:
+        print("Error: --topic is required for native mode")
+        print("Usage: python run_claude_research.py --topic 'Your topic' --no-api")
+        return 1
+
+    output_dir = args.output_dir if args.output_dir else "./research_output"
+
+    # Handle reset
+    if args.reset:
+        from pathlib import Path
+        state_file = Path(output_dir) / "workflow_state.json"
+        if state_file.exists():
+            state_file.unlink()
+            print(f"Workflow state reset.")
+        else:
+            print("No state file to reset.")
+        return 0
+
+    # Create or load workflow
+    workflow = ClaudeNativeWorkflow(
+        research_topic=args.topic,
+        output_dir=output_dir,
+        config={"num_papers_lit_review": args.papers}
+    )
+
+    # Show status
+    print(workflow.get_current_status())
+
+    if args.status:
+        return 0
+
+    # Generate and display next task
+    task = workflow.generate_next_task()
+    print_claude_code_instructions(task)
+
+    if task.get("status") == "completed":
+        print("\nAll phases complete! Your research outputs are in:")
+        print(f"  {output_dir}/results/")
+        return 0
+
+    print("\n" + "=" * 70)
+    print("NEXT STEPS FOR CLAUDE CODE")
+    print("=" * 70)
+    print("1. Execute the task above using your native tools")
+    print("2. Save output to the specified file")
+    print("3. Run this command again to get the next task:")
+    print(f"   python run_claude_research.py --topic \"{args.topic}\" --no-api")
+    print("=" * 70)
+
+    return 0
 
 
 def main():
@@ -34,8 +93,14 @@ Examples:
   # Run with human-in-the-loop
   python run_claude_research.py --topic "RL for robotics" --human-in-loop
 
+  # Run in Claude Code native mode (no API key needed)
+  python run_claude_research.py --topic "Few-shot learning" --no-api
+
+  # Check status of native workflow
+  python run_claude_research.py --topic "Few-shot learning" --no-api --status
+
 Environment Variables:
-  ANTHROPIC_API_KEY     - Required: Your Anthropic API key
+  ANTHROPIC_API_KEY     - Required for API mode (not needed with --no-api)
   CLAUDE_RESEARCH_TOPIC - Override research topic
   CLAUDE_MODEL          - Override model (default: claude-sonnet-4-5-20250929)
   CLAUDE_MAX_BUDGET     - Override max budget in USD
@@ -128,6 +193,23 @@ Environment Variables:
         help="Run in copilot mode (more human interaction)"
     )
 
+    # Native mode (no API)
+    parser.add_argument(
+        "--no-api",
+        action="store_true",
+        help="Run in Claude Code native mode (no API key needed, runs within Claude Pro)"
+    )
+    parser.add_argument(
+        "--status",
+        action="store_true",
+        help="Show workflow status (for native mode)"
+    )
+    parser.add_argument(
+        "--reset",
+        action="store_true",
+        help="Reset native workflow state"
+    )
+
     # Utility options
     parser.add_argument(
         "--resume",
@@ -156,7 +238,11 @@ Environment Variables:
         print(f"  python run_claude_research.py --config {args.create_config}")
         return 0
 
-    # Check API key
+    # Handle native mode (no API)
+    if args.no_api:
+        return run_native_mode(args)
+
+    # Check API key (only for API mode)
     if not os.getenv("ANTHROPIC_API_KEY"):
         print("Error: ANTHROPIC_API_KEY environment variable not set")
         print("\nPlease set your Anthropic API key:")
