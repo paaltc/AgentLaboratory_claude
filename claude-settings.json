@@ -1,0 +1,138 @@
+{
+  "name": "Agent Laboratory",
+  "version": "1.0.0",
+  "description": "Autonomous LLM-powered research workflow system",
+
+  "model_preferences": {
+    "default": "claude-3-5-sonnet-20241022",
+    "reasoning": "claude-3-7-sonnet-20250219",
+    "lightweight": "claude-3-5-haiku-20241022"
+  },
+
+  "max_tokens": 8096,
+  "temperature": 0.7,
+
+  "allowed_tools": [
+    "bash",
+    "read",
+    "edit",
+    "write",
+    "glob",
+    "grep"
+  ],
+
+  "disabled_commands": [],
+
+  "environment": {
+    "python_version": "3.10+",
+    "working_directory": "/home/user/AgentLaboratory_claude"
+  },
+
+  "project_settings": {
+    "language": "English",
+    "package_manager": "pip",
+    "test_command": "python -m pytest tests/ --tb=short 2>/dev/null || echo 'No tests configured'",
+    "lint_command": "python -m pylint agents.py ai_lab_repo.py --disable=all --enable=syntax-error 2>/dev/null || echo 'Syntax check complete'"
+  },
+
+  "required_env_vars": [
+    {
+      "name": "OPENAI_API_KEY",
+      "description": "OpenAI API key for GPT-4o and O3-mini models",
+      "example": "sk-proj-...",
+      "optional": false
+    },
+    {
+      "name": "ANTHROPIC_API_KEY",
+      "description": "Anthropic API key for Claude models",
+      "example": "sk-ant-...",
+      "optional": true
+    }
+  ],
+
+  "dependencies_management": {
+    "install_command": "pip install -r requirements.txt",
+    "freeze_command": "pip freeze > requirements.txt",
+    "requirements_file": "requirements.txt"
+  },
+
+  "commands_directory": ".claude/commands",
+
+  "key_files": [
+    {
+      "path": "agents.py",
+      "description": "Core agent classes and implementations",
+      "type": "source"
+    },
+    {
+      "path": "ai_lab_repo.py",
+      "description": "Main workflow orchestrator",
+      "type": "source"
+    },
+    {
+      "path": "tools.py",
+      "description": "Search and execution tools",
+      "type": "source"
+    },
+    {
+      "path": "inference.py",
+      "description": "LLM inference wrapper",
+      "type": "source"
+    },
+    {
+      "path": "CLAUDE.md",
+      "description": "Project documentation for Claude",
+      "type": "documentation"
+    }
+  ],
+
+  "gitignore_additions": [
+    "venv/",
+    "venv_*",
+    "state_saves/",
+    ".claude-settings/",
+    ".claude-cache/",
+    "*.egg-info/",
+    "__pycache__/",
+    ".pytest_cache/",
+    "huggingface_*",
+    "downloaded-paper.pdf",
+    ".DS_Store"
+  ],
+
+  "workflow_hints": {
+    "before_running_any_command": [
+      "Ensure Python 3.10+ is available",
+      "Verify requirements.txt dependencies are installed",
+      "Set OPENAI_API_KEY environment variable",
+      "Review .claude/commands/ for available operations"
+    ],
+    "best_practices": [
+      "Always check syntax with python -m py_compile",
+      "Test code execution with /execute-code command",
+      "Use /save-checkpoint to persist workflow state",
+      "Review agent outputs in the generated artifacts",
+      "Monitor token usage and API costs"
+    ]
+  },
+
+  "performance_hints": {
+    "heavy_operations": [
+      "literature_review() - Network I/O for arXiv API calls",
+      "running_experiments() - CPU-intensive ML computations",
+      "report_writing() - Token-heavy LLM calls for LaTeX generation"
+    ],
+    "recommended_timeouts": {
+      "literature_review": 600,
+      "running_experiments": 3600,
+      "report_writing": 1800
+    }
+  },
+
+  "debugging_tips": {
+    "check_imports": "python -m py_compile agents.py ai_lab_repo.py tools.py",
+    "test_api_connection": "python -c \"from inference import query_model; print('API OK')\"",
+    "view_state": "ls -lh state_saves/",
+    "clear_state": "rm -rf state_saves/*"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "python",
+      "args": ["-m", "mcp.server.stdio", "filesystem"],
+      "disabled": false,
+      "env": {}
+    },
+    "python": {
+      "command": "python",
+      "args": ["-m", "mcp.server.stdio", "python"],
+      "disabled": false,
+      "env": {
+        "PYTHONPATH": "/home/user/AgentLaboratory_claude"
+      }
+    }
+  },
+  "claude_code": {
+    "enabled": true,
+    "version": "1.0.0",
+    "features": {
+      "bash_execution": true,
+      "file_operations": true,
+      "git_operations": true,
+      "code_editing": true
+    }
+  },
+  "project_settings": {
+    "name": "Agent Laboratory",
+    "type": "research_automation",
+    "language": "python",
+    "min_python_version": "3.10"
+  }
+}
