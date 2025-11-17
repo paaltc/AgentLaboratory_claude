@@ -4,16 +4,167 @@ from app import *
 from agents import *
 from copy import copy
 from pathlib import Path
-from datetime import date
+from datetime import date, datetime
 from common_imports import *
 from mlesolver import MLESolver
-import argparse, pickle, yaml
+import argparse, pickle, yaml, json
 
 GLOBAL_AGENTRXIV = None
 DEFAULT_LLM_BACKBONE = "o3-mini"
 RESEARCH_DIR_PATH = "MATH_research_dir"
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
+
+
+# ============================================================================
+# CHECKPOINT & TOKEN MANAGEMENT SYSTEM FOR CLAUDE PRO
+# ============================================================================
+
+class CheckpointManager:
+    """Manages checkpoints for resumable workflows"""
+
+    def __init__(self, lab_dir="MATH_research_dir"):
+        self.lab_dir = Path(lab_dir)
+        self.state_dir = Path("state_saves")
+        self.state_dir.mkdir(exist_ok=True)
+
+    def create_checkpoint(self, phase_name, workflow_state, token_count=0, tokens_used=0):
+        """
+        Create a checkpoint for current phase
+
+        Args:
+            phase_name: Name of current phase (e.g., "literature_review")
+            workflow_state: The LaboratoryWorkflow instance or state dict
+            token_count: Total tokens in session
+            tokens_used: Tokens used so far
+
+        Returns:
+            checkpoint_id: Unique identifier for this checkpoint
+        """
+        checkpoint_id = f"{phase_name}_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+        checkpoint_file = self.state_dir / f"{phase_name}_checkpoint.pkl"
+
+        checkpoint_data = {
+            'phase': phase_name,
+            'timestamp': datetime.now().isoformat(),
+            'workflow_state': workflow_state,
+            'token_count': token_count,
+            'tokens_used': tokens_used,
+            'checkpoint_id': checkpoint_id,
+        }
+
+        # Save checkpoint
+        with open(checkpoint_file, 'wb') as f:
+            pickle.dump(checkpoint_data, f)
+
+        # Also save metadata for quick lookup
+        metadata_file = self.state_dir / f"{phase_name}_metadata.json"
+        with open(metadata_file, 'w') as f:
+            json.dump({
+                'checkpoint_id': checkpoint_id,
+                'phase': phase_name,
+                'timestamp': checkpoint_data['timestamp'],
+                'tokens_used': tokens_used,
+                'file': str(checkpoint_file),
+            }, f, indent=2)
+
+        return checkpoint_id
+
+    def load_checkpoint(self, phase_name):
+        """
+        Load checkpoint for a phase
+
+        Args:
+            phase_name: Name of phase to load
+
+        Returns:
+            checkpoint_data or None if not found
+        """
+        checkpoint_file = self.state_dir / f"{phase_name}_checkpoint.pkl"
+
+        if checkpoint_file.exists():
+            with open(checkpoint_file, 'rb') as f:
+                return pickle.load(f)
+        return None
+
+    def list_checkpoints(self):
+        """List all available checkpoints"""
+        checkpoints = []
+        for pkl_file in self.state_dir.glob("*_checkpoint.pkl"):
+            try:
+                with open(pkl_file, 'rb') as f:
+                    data = pickle.load(f)
+                    checkpoints.append({
+                        'phase': data.get('phase'),
+                        'timestamp': data.get('timestamp'),
+                        'tokens_used': data.get('tokens_used'),
+                        'file': str(pkl_file),
+                    })
+            except:
+                pass
+        return checkpoints
+
+
+class TokenManager:
+    """Manages token limits for Claude Pro sessions"""
+
+    # Claude Pro token limits (approximate)
+    TOKEN_LIMITS = {
+        'claude-3-5-sonnet': 200000,
+        'claude-3-opus': 200000,
+        'gpt-4o': 128000,
+        'gpt-4o-mini': 128000,
+        'o1-mini': 128000,
+        'o3-mini': 200000,
+    }
+
+    # Warn when reaching this % of limit
+    WARNING_THRESHOLD = 0.75
+
+    # Dangerous zone - save and prepare to resume
+    DANGER_THRESHOLD = 0.90
+
+    def __init__(self, model='gpt-4o', token_limit=None):
+        self.model = model
+        self.limit = token_limit or self.TOKEN_LIMITS.get(model, 128000)
+        self.tokens_used = 0
+        self.phase_tokens = {}
+
+    def add_tokens(self, phase_name, tokens):
+        """Track tokens used in a phase"""
+        self.tokens_used += tokens
+        if phase_name not in self.phase_tokens:
+            self.phase_tokens[phase_name] = 0
+        self.phase_tokens[phase_name] += tokens
+
+    def get_remaining(self):
+        """Get remaining tokens"""
+        return self.limit - self.tokens_used
+
+    def get_usage_percent(self):
+        """Get token usage as percentage"""
+        return (self.tokens_used / self.limit) * 100 if self.limit > 0 else 0
+
+    def is_warning_level(self):
+        """Check if approaching warning threshold"""
+        return self.get_usage_percent() >= (self.WARNING_THRESHOLD * 100)
+
+    def is_danger_level(self):
+        """Check if in danger zone"""
+        return self.get_usage_percent() >= (self.DANGER_THRESHOLD * 100)
+
+    def get_status(self):
+        """Get token usage status"""
+        return {
+            'model': self.model,
+            'total_limit': self.limit,
+            'tokens_used': self.tokens_used,
+            'remaining': self.get_remaining(),
+            'percent_used': self.get_usage_percent(),
+            'is_warning': self.is_warning_level(),
+            'is_danger': self.is_danger_level(),
+            'by_phase': self.phase_tokens,
+        }
 
 
 class LaboratoryWorkflow:
@@ -91,6 +242,12 @@ class LaboratoryWorkflow:
 
         self.save = True
         self.verbose = True
+
+        # Initialize checkpoint and token management systems
+        self.checkpoint_mgr = CheckpointManager(lab_dir=lab_dir or RESEARCH_DIR_PATH)
+        self.token_mgr = TokenManager(model=agent_model_backbone if isinstance(agent_model_backbone, str) else agent_model_backbone.get("literature review", DEFAULT_LLM_BACKBONE))
+        self.resume_from_checkpoint = False
+
         self.reviewers = ReviewersAgent(model=self.model_backbone, notes=self.notes, openai_api_key=self.openai_api_key)
         self.phd = PhDStudentAgent(model=self.model_backbone, notes=self.notes, max_steps=self.max_steps, openai_api_key=self.openai_api_key)
         self.postdoc = PostdocAgent(model=self.model_backbone, notes=self.notes, max_steps=self.max_steps, openai_api_key=self.openai_api_key)
@@ -136,9 +293,83 @@ class LaboratoryWorkflow:
         self.ml_engineer.reset()
         self.sw_engineer.reset()
 
+    def save_phase_checkpoint(self, phase_name, tokens_used=0):
+        """
+        Save checkpoint for current phase (for resumption)
+        @param phase_name: (str) phase name
+        @param tokens_used: (int) tokens used in this phase
+        @return: checkpoint_id
+        """
+        checkpoint_id = self.checkpoint_mgr.create_checkpoint(
+            phase_name=phase_name,
+            workflow_state=self,
+            tokens_used=tokens_used
+        )
+        if self.verbose:
+            print(f"✓ Checkpoint saved for phase '{phase_name}' (ID: {checkpoint_id})")
+        return checkpoint_id
+
+    def check_token_limits(self, phase_name, estimated_tokens=5000):
+        """
+        Check if approaching token limits and log warnings
+        @param phase_name: (str) current phase
+        @param estimated_tokens: (int) estimated tokens for this phase
+        @return: (bool) whether to proceed or save and stop
+        """
+        self.token_mgr.add_tokens(phase_name, estimated_tokens)
+        status = self.token_mgr.get_status()
+
+        if self.verbose:
+            print(f"\n--- Token Status for {phase_name} ---")
+            print(f"Used: {status['tokens_used']:,} / {status['total_limit']:,}")
+            print(f"Usage: {status['percent_used']:.1f}%")
+            print(f"Remaining: {status['remaining']:,}")
+
+        if status['is_danger']:
+            print(f"\n⚠️  DANGER ZONE: Token usage at {status['percent_used']:.1f}%")
+            print(f"⚠️  Recommend saving checkpoint and resuming in new session")
+            return False
+        elif status['is_warning']:
+            print(f"\n⚠️  WARNING: Token usage at {status['percent_used']:.1f}%")
+            print(f"⚠️  Approaching token limit. Monitor usage closely.")
+            return True
+
+        return True
+
+    def load_checkpoint_if_exists(self, phase_name):
+        """
+        Load checkpoint for phase if it exists
+        @param phase_name: (str) phase name to load
+        @return: (bool) whether checkpoint was loaded
+        """
+        checkpoint = self.checkpoint_mgr.load_checkpoint(phase_name)
+        if checkpoint:
+            if self.verbose:
+                print(f"\n✓ Found checkpoint for '{phase_name}'")
+                print(f"  Timestamp: {checkpoint.get('timestamp')}")
+                print(f"  Tokens used: {checkpoint.get('tokens_used'):,}")
+            self.resume_from_checkpoint = True
+            return True
+        return False
+
+    def print_token_status(self):
+        """Print detailed token usage status"""
+        status = self.token_mgr.get_status()
+        print("\n" + "="*60)
+        print("TOKEN USAGE SUMMARY")
+        print("="*60)
+        print(f"Model: {status['model']}")
+        print(f"Total limit: {status['total_limit']:,} tokens")
+        print(f"Tokens used: {status['tokens_used']:,} ({status['percent_used']:.1f}%)")
+        print(f"Remaining: {status['remaining']:,} tokens")
+        print("\nBy Phase:")
+        for phase, tokens in status['by_phase'].items():
+            print(f"  {phase:25s}: {tokens:>8,} tokens")
+        print("="*60 + "\n")
+
     def perform_research(self):
         """
-        Loop through all research phases
+        Loop through all research phases with checkpoint support for Claude Pro token limits
         @return: None
         """
         for phase, subtasks in self.phases:
@@ -153,6 +384,26 @@ class LaboratoryWorkflow:
                     if subtask in self.phase_models:
                         self.set_model(self.phase_models[subtask])
                     else: self.set_model(f"{DEFAULT_LLM_BACKBONE}")
+
+                # Check token limits before proceeding
+                estimated_tokens = {
+                    "literature review": 2000,
+                    "plan formulation": 8000,
+                    "data preparation": 10000,
+                    "running experiments": 30000,
+                    "results interpretation": 15000,
+                    "report writing": 40000,
+                    "report refinement": 10000,
+                }.get(subtask, 5000)
+
+                can_proceed = self.check_token_limits(subtask, estimated_tokens)
+                if not can_proceed:
+                    # Save checkpoint before stopping
+                    self.save_phase_checkpoint(subtask, estimated_tokens)
+                    print("\n⚠️  Token limit approaching. Saving checkpoint...")
+                    print(f"Resume this workflow in a new Claude Pro session.")
+                    return
+
                 if (subtask not in self.phase_status or not self.phase_status[subtask]) and subtask == "literature review":
                     repeat = True
                     while repeat: repeat = self.literature_review()
@@ -182,6 +433,9 @@ class LaboratoryWorkflow:
 
                     if not return_to_exp_phase:
                         if self.save: self.save_state(subtask)
+                        # Save final checkpoint
+                        self.save_phase_checkpoint(subtask)
+                        self.print_token_status()
                         return
 
                     self.set_agent_attr("second_round", return_to_exp_phase)
@@ -197,12 +451,19 @@ class LaboratoryWorkflow:
                     self.phase_status["report writing"] = False
                     self.phase_status["report refinement"] = False
                     self.perform_research()
+
+                # Save checkpoint after each phase completes
+                self.save_phase_checkpoint(subtask)
+
                 if self.save: self.save_state(subtask)
                 # Calculate and print the duration of the phase
                 phase_end_time = time.time()
                 phase_duration = phase_end_time - phase_start_time
                 print(f"Subtask '{subtask}' completed in {phase_duration:.2f} seconds.")
                 self.statistics_per_phase[subtask]["time"] = phase_duration
+
+        # Print final token usage summary
+        self.print_token_status()
 
     def report_refinement(self):
         """
