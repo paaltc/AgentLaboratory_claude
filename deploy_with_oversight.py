@@ -50,13 +50,20 @@ def main():
 
     args = parser.parse_args()
 
-    # Check API key
+    # Check API key - works with explicit key OR Claude Code Web authentication
     anthropic_key = os.getenv("ANTHROPIC_API_KEY")
+
+    # If no explicit key, Claude Code Web will use built-in authentication
     if not anthropic_key:
-        print("ERROR: ANTHROPIC_API_KEY environment variable not set")
-        print("Please set your API key:")
-        print("  export ANTHROPIC_API_KEY='sk-ant-...'")
-        sys.exit(1)
+        anthropic_base_url = os.getenv("ANTHROPIC_BASE_URL")
+        if anthropic_base_url:
+            print("✓ Using Claude Code Web authentication (no explicit API key needed)")
+        else:
+            print("ERROR: Neither ANTHROPIC_API_KEY nor Claude Code Web environment detected")
+            print("Please either:")
+            print("  1. Export API key: export ANTHROPIC_API_KEY='sk-ant-...'")
+            print("  2. Or run in Claude Code Web where authentication is built-in")
+            sys.exit(1)
 
     # Get research topic
     if args.topic:
