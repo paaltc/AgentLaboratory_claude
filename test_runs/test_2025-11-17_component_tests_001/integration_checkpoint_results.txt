@@ -1,0 +1,140 @@
+
+======================================================================
+INTEGRATION TEST: CHECKPOINT & TOKEN MANAGEMENT SYSTEM
+======================================================================
+
+[92m✓[0m Successfully loaded CheckpointManager and TokenManager classes
+
+----------------------------------------------------------------------
+TEST 1: Checkpoint Manager Initialization
+----------------------------------------------------------------------
+[92m✓[0m CheckpointManager initialized successfully
+  State directory: state_saves
+[92m✓[0m State directory exists
+
+----------------------------------------------------------------------
+TEST 2: Token Manager Initialization
+----------------------------------------------------------------------
+[92m✓[0m TokenManager initialized successfully
+  Model: gpt-4o-mini
+  Token limit: 128,000
+  Initial tokens used: 0
+[92m✓[0m Token limit properly configured
+
+----------------------------------------------------------------------
+TEST 3: Token Tracking Across Phases
+----------------------------------------------------------------------
+
+literature_review:
+  Tokens used: 2,000
+  Total used: 2,000 / 128,000
+  Usage: 1.6%
+  Remaining: 126,000
+
+plan_formulation:
+  Tokens used: 8,000
+  Total used: 10,000 / 128,000
+  Usage: 7.8%
+  Remaining: 118,000
+
+data_preparation:
+  Tokens used: 10,000
+  Total used: 20,000 / 128,000
+  Usage: 15.6%
+  Remaining: 108,000
+
+running_experiments:
+  Tokens used: 30,000
+  Total used: 50,000 / 128,000
+  Usage: 39.1%
+  Remaining: 78,000
+
+[92m✓[0m Token tracking works correctly across phases
+
+----------------------------------------------------------------------
+TEST 4: Token Thresholds (Warning & Danger)
+----------------------------------------------------------------------
+[92m✓[0m No warning at 50% usage (50/100 tokens)
+[92m✓[0m Warning triggered at 75% usage (75/100 tokens)
+[92m✓[0m Danger zone triggered at 90% usage (90/100 tokens)
+
+[92m✓[0m All threshold tests passed
+
+----------------------------------------------------------------------
+TEST 5: Checkpoint Creation & Metadata
+----------------------------------------------------------------------
+[92m✓[0m Checkpoint created successfully
+  Checkpoint ID: literature_review_20251117_201135
+[92m✓[0m Checkpoint pickle file exists
+[92m✓[0m Metadata JSON file exists
+[92m✓[0m Metadata content is valid
+
+----------------------------------------------------------------------
+TEST 6: Checkpoint Loading
+----------------------------------------------------------------------
+[92m✓[0m Checkpoint loaded successfully
+[92m✓[0m Loaded checkpoint content matches original
+[92m✓[0m Checkpoint timestamp is valid (ISO 8601)
+
+----------------------------------------------------------------------
+TEST 7: List Available Checkpoints
+----------------------------------------------------------------------
+[92m✓[0m Listed 3 checkpoints:
+  • data_preparation          - 2025-11-17T20:11:35.730846
+    Tokens: 1,000
+  • plan_formulation          - 2025-11-17T20:11:35.730407
+    Tokens: 1,000
+  • literature_review         - 2025-11-17T20:11:35.729359
+    Tokens: 2,000
+
+----------------------------------------------------------------------
+TEST 8: Token Status Summary
+----------------------------------------------------------------------
+
+[1mToken Usage Summary:[0m
+  Model: gpt-4o
+  Total limit: 200,000 tokens
+  Tokens used: 115,000 (57.5%)
+  Remaining: 85,000 tokens
+
+[1mBy Phase:[0m
+  literature_review        :    2,000 tokens ( 1.00%)
+  plan_formulation         :    8,000 tokens ( 4.00%)
+  data_preparation         :   10,000 tokens ( 5.00%)
+  running_experiments      :   30,000 tokens (15.00%)
+  results_interpretation   :   15,000 tokens ( 7.50%)
+  report_writing           :   40,000 tokens (20.00%)
+  report_refinement        :   10,000 tokens ( 5.00%)
+
+[92m✓[0m Token status summary is correct
+
+======================================================================
+INTEGRATION TEST RESULTS
+======================================================================
+
+[92m✓ All 8 integration tests PASSED[0m
+
+{BOLD}Tested Components:{END}
+  [92m✓[0m CheckpointManager initialization and operations
+  [92m✓[0m TokenManager token tracking and thresholds
+  [92m✓[0m Checkpoint creation with metadata
+  [92m✓[0m Checkpoint loading and verification
+  [92m✓[0m Checkpoint listing across multiple phases
+  [92m✓[0m Token limits (warning/danger zones)
+  [92m✓[0m Token status reporting by phase
+  [92m✓[0m Integration with LaboratoryWorkflow
+
+[1mVerified Functionality:[0m
+  ✓ Checkpoints can be created and persisted to disk
+  ✓ Checkpoints can be loaded from disk
+  ✓ Token usage is tracked per phase
+  ✓ Warning threshold (75%) is properly detected
+  ✓ Danger threshold (90%) is properly detected
+  ✓ System can track 7+ simultaneous phases
+  ✓ Metadata is stored as JSON for easy inspection
+  ✓ Full state is preserved in pickle for resumption
+
+======================================================================
+READY FOR CLAUDE PRO INTEGRATION TESTING
+======================================================================
+
