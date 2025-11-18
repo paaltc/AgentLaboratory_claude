@@ -3,9 +3,10 @@ Claude Code Migration - Agent System
 Redesigned agents using Claude's native tool-calling capabilities
 """
 import json
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Tuple
 from claude_inference import ClaudeClient, get_current_cost, get_token_stats
 from claude_tools import ToolExecutor, get_tools_for_role
+from claude_commands import CommandParser, CommandInstructionBuilder
 
 
 class ClaudeAgent:
@@ -306,6 +307,104 @@ Important guidelines:
             }
 
         return f"Max tool rounds ({self.max_tool_rounds}) reached. Last response: {text_response}"
+
+    def inference_with_commands(
+        self,
+        task: str,
+        context: Dict[str, Any],
+        phase: str,
+        feedback: str = "",
+        step: int = 0,
+        available_commands: Optional[List[str]] = None,
+        print_cost: bool = True
+    ) -> Tuple[str, Optional[str], Optional[str]]:
+        """
+        Perform inference that returns structured commands.
+
+        Maintains compatibility with original AgentLaboratory command system.
+        Agents respond with commands in format: ```COMMAND\ncontent\n```
+
+        Args:
+            task: The task description
+            context: Additional context (research artifacts)
+            phase: Current research phase
+            feedback: Feedback from previous turn or tool execution
+            step: Current step number
+            available_commands: List of available command markers (e.g., ["DIALOGUE", "PLAN"])
+            print_cost: Whether to print cost estimates
+
+        Returns:
+            (full_response, command_type, command_content)
+            - full_response: Complete agent response
+            - command_type: Parsed command (e.g., "submit_plan", "dialogue")
+            - command_content: Content of the command
+        """
+        # Build system prompt with command instructions
+        system_prompt = self.get_system_prompt(phase)
+
+        # Add command-specific instructions based on phase and role
+        command_instructions = self._get_command_instructions(phase)
+        if command_instructions:
+            system_prompt += "\n\n" + command_instructions
+
+        # Build context-rich user message
+        user_message = self._build_context_message(task, context, phase)
+
+        # Add feedback if provided
+        if feedback:
+            user_message = f"{user_message}\n\nFeedback: {feedback}"
+
+        # Add step information
+        if step > 0:
+            user_message = f"Step #{step}\n\n{user_message}"
+
+        # Perform inference (no tools for command-based dialogue)
+        response = self.client.query(
+            prompt=user_message,
+            system_prompt=system_prompt,
+            model=self.model,
+            temperature=self.temperature,
+            print_cost=print_cost
+        )
+
+        # Parse response for commands
+        command_type, command_content = CommandParser.extract_command(response)
+
+        return (response, command_type, command_content)
+
+    def _get_command_instructions(self, phase: str) -> str:
+        """
+        Get command instructions for current phase and role.
+
+        Returns exact instruction strings from original AgentLaboratory.
+        """
+        builder = CommandInstructionBuilder()
+
+        if phase == "literature review":
+            return builder.get_literature_review_instructions()
+
+        elif phase == "plan formulation":
+            return builder.get_plan_formulation_instructions(self.role)
+
+        elif phase == "data preparation":
+            return builder.get_data_preparation_instructions(self.role)
+
+        elif phase == "results interpretation":
+            return builder.get_results_interpretation_instructions(self.role)
+
+        elif phase == "report writing":
+            return builder.get_report_writing_instructions(self.role)
+
+        return ""
+
+    def reset(self):
+        """
+        Reset agent state (mimics original BaseAgent.reset()).
+
+        Clears conversation history to start fresh in new phase.
+        """
+        self.conversation_history.clear()
+        # Note: In original, also clears prev_comm, but we don't track that separately
 
     def dialogue(
         self,
