@@ -471,7 +471,9 @@ Include standard sections:
 - Conclusion
 - References
 
-Write in academic style with proper LaTeX formatting."""
+Write in academic style with proper LaTeX formatting.
+
+IMPORTANT: Do NOT include \\usepackage[utf-8]{{inputenc}} - this is legacy and unnecessary in modern LaTeX (UTF-8 is default since 2018)."""
             else:
                 paper_prompt = f"""Improve the paper based on reviewer feedback.
 

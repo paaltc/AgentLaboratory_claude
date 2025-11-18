@@ -388,7 +388,9 @@ Write a complete LaTeX research paper with:
 
 Save to: {paper_file}
 
-Ensure academic rigor and proper citations."""
+Ensure academic rigor and proper citations.
+
+IMPORTANT: Do NOT include \\usepackage[utf-8]{{inputenc}} in your LaTeX - this is legacy and unnecessary in modern LaTeX (UTF-8 is default since 2018)."""
 
         # Reviewer evaluates
         review_prompt = f"""{self.get_reviewer_prompt()}

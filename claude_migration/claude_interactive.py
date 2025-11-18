@@ -332,6 +332,8 @@ def generate_paper_prompt(topic: str) -> str:
 \\end{{document}}
 ```
 
+**IMPORTANT**: Do NOT include `\\usepackage[utf-8]{{inputenc}}` - this is legacy and unnecessary in modern LaTeX (UTF-8 is default since 2018).
+
 Please execute this task using your Read and Write tools.
 """
 

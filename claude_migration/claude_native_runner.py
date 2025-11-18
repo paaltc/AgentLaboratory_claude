@@ -559,6 +559,8 @@ Write the paper to: `{self.results_dir}/research_paper.tex`
 \\end{{document}}
 ```
 
+**IMPORTANT**: Do NOT include `\\usepackage[utf-8]{{inputenc}}` - this is legacy and unnecessary in modern LaTeX (UTF-8 is default since 2018).
+
 ## Tools to Use
 - **Read**: Read literature, plan, and results files if needed
 - **Write**: Write the LaTeX paper to the output file
